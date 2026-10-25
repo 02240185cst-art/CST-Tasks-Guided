@@ -8,18 +8,19 @@ import AddTaskForm from './src/components/AddTaskForm';
 import FilterBar from './src/components/FilterBar';
 import TaskItem from './src/components/TaskItem';
 
+
 export default function App() {
   const [tasks, setTasks] = useState([]);
   const [filter, setFilter] = useState('All');
   const [newTitle, setNewTitle] = useState('');
   const [error, setError] = useState(null);
 
-  // Load the starting tasks from the server once, when the app opens
   useEffect(() => {
     fetchTasks()
       .then(setTasks)
       .catch((err) => setError(err.message));
   }, []);
+
 
   function addTask() {
     const title = newTitle.trim();
@@ -29,7 +30,9 @@ export default function App() {
   }
 
   function toggleTask(id) {
+    
     setTasks(tasks.map((t) => (t.id === id ? { ...t, done: !t.done } : t)));
+    
   }
 
   function deleteTask(id) {
